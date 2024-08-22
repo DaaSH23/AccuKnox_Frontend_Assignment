@@ -62,7 +62,7 @@ yarn build
 ## Project Structure
 
 ```bash
-yourprojectname/
+Accuknox/frontend/
 │
 ├── public/           # Public files
 ├── src/              # Source files
