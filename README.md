@@ -1,4 +1,4 @@
-# Project Name
+# Accuknox Frontend Assignment (Dynamic Dashboard)
 
 A brief description of your project, what it does, and why it’s useful.
 
