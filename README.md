@@ -61,6 +61,7 @@ yarn build
 
 ## Project Structure
 
+```bash
 yourprojectname/
 │
 ├── public/           # Public files
@@ -73,6 +74,7 @@ yourprojectname/
 ├── package.json      # Node.js dependencies and scripts
 ├── README.md         # The file you're reading
 └── ...               # Any other essential files
+```
 
 ## Contacts
   email - reachtoabhisheko@gmail.com
