@@ -11,6 +11,7 @@ const Popup = ({ isVisible, onClose }) => {
     const [formInputs, setFormInputs] = useState({ widgetName: "", widgetText: "" });
     const [formError, setErrorInputs] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
 
     const [selectedWidgetIds, setSelectedWidgetIds] = useState([]);
     const dispatch = useDispatch();
@@ -72,6 +73,16 @@ const Popup = ({ isVisible, onClose }) => {
             });
         });
         onClose();
+    };
+
+    const filterWidgets = (widgets, searchTerm) => {
+        return Object.entries(widgets).reduce((filtered, [widgetId, widget]) => {
+            if (widget.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                widget.text.toLowerCase().includes(searchTerm.toLowerCase())) {
+                filtered[widgetId] = widget;
+            }
+            return filtered;
+        }, {});
     };
 
     useEffect(() => {
@@ -181,11 +192,21 @@ const Popup = ({ isVisible, onClose }) => {
                             </div>
                         )}
 
+                        <div className='mx-4'>
+                            <input
+                                type="text"
+                                placeholder="Search widgets..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full p-2 mt-4  rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                            />
+                        </div>
+
                         {Object.entries(selectedWidgets).map(([categoryId, category]) => (
                             <div key={categoryId}>
                                 {tabNo === parseInt(categoryId) && (
                                     <div className='p-4'>
-                                        {Object.entries(category.widgets).map(([widgetId, widget]) => {
+                                        {Object.entries(filterWidgets(category.widgets, searchTerm)).map(([widgetId, widget]) => {
                                             const key = `${categoryId}-${widgetId}`;
                                             return (
                                                 <div key={key} className='flex items-center space-x-2 mb-2 p-2 border-gray-300 border rounded-md'>
